@@ -1,7 +1,7 @@
 # Dot-Discord
 Discord Bot (Py)
 
-**#Python3 Dependencies**
+**#Python3 Module Dependencies**
 * *discord*
 * *json*
 * *io*
