@@ -10,7 +10,7 @@ from os import environ
 BOT_TOKEN = environ['DISCORD_DOT_TOKEN']
 nsfw_filter = True
 meme_api = "https://meme-api.herokuapp.com/gimme"
-greet_words = ("Bonjour","Hola","Zdravstvuyte","Nǐn hǎo","Ciao","Yassou","Selamat siang","नमस्ते","Merhaba",)
+greet_words = ("Bonjour","Hola","Zdravstvuyte","Nǐn hǎo","Ciao","Yassou","Selamat siang","नमस्ते","Merhaba","नमो नमः")
 greet_identifiers = ("👋","hello","hi","hey","namaste","🙏","hallo","halo")
 bot = discord.Client()
 
