@@ -59,10 +59,4 @@ async def on_message(msg):
     elif msg.author != bot.user and msg.content.lower().startswith(greet_identifiers):
       await greet(msg)
 
-      # await msg.channel.send(file=discord.File(await meme(get_meme), 'meme.png'))
-        # reply = message_activities(msg.content)
-        # if reply is not None:
-        #   await msg.channel.send(reply)
-
-
 bot.run(BOT_TOKEN)
