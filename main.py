@@ -4,6 +4,7 @@ import json
 import io
 import random
 import aiohttp
+import asyncio
 
 from os import environ
 
@@ -45,6 +46,22 @@ async def meme(msg):
 async def greet(msg):
   await msg.channel.send(random.choice(greet_words)+" :wave:")
 
+async def clear(msg):
+  message = msg.content.split(' ')
+  if len(message) == 1:
+    await msg.channel.purge(limit=2)
+    print(f"cleared 1 message from {msg.channel}")
+  elif message[1].isnumeric():
+    if int(message[1]) > 30:
+      await msg.channel.send("[-] Can not purge more than 30 messages at once :rolling_eyes:")
+      return
+    await msg.channel.purge(limit= int(message[1])+1)
+    await msg.channel.send(f"[+] Removed {message[1]} messages")
+
+  else:
+    await msg.channel.send("[-] Invalid argument for clear command :confused: ")
+
+
 @bot.event
 async def on_message(msg):
     # If message is the one which is sent by this bot
@@ -53,10 +70,13 @@ async def on_message(msg):
         await meme(msg)
       elif msg.content.lower() in ['.hi','.hello']:
         await greet(msg)
+      
+      elif msg.content.split(' ')[0] == ".clear":
+        await clear(msg)
       else:
         pass
 
     elif msg.author != bot.user and msg.content.lower().startswith(greet_identifiers):
       await greet(msg)
-
+  
 bot.run(BOT_TOKEN)
