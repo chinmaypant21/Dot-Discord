@@ -13,14 +13,6 @@ greet_words = ("Bonjour","Hola","Zdravstvuyte","Nǐn hǎo","Ciao","Yassou","Sela
 greet_identifiers = ("👋","hello","hi","hey","namaste","🙏","hallo","halo")
 bot = discord.Client()
 
-def message_activities(msg):
-    activities = {".hello": 1, ".bye": 2, ".info": 3}
-    if msg in activities:
-        return activities[msg]
-    else:
-        return None
-
-
 @bot.event
 async def on_ready():
     print(f"Logged In as {bot.user}")
