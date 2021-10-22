@@ -15,6 +15,12 @@ greet_words = ("Bonjour","Hola","Zdravstvuyte","Nǐn hǎo","Ciao","Yassou","Sela
 greet_identifiers = ("👋","hello","hi","hey","namaste","🙏","hallo","halo")
 bot = discord.Client()
 
+def getEmbed(title,description,color):
+    #find all properties of discord.Embed at:
+    #https://discordpy.readthedocs.io/en/latest/api.html#embed
+    #send embedded msg by channel.send(embed=embeddedMsg)
+    return discord.Embed(title=title,description=description,color=color)
+  
 def message_activities(msg):
     activities = {".hello": 1, ".bye": 2, ".info": 3}
     if msg in activities:
