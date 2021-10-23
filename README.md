@@ -8,5 +8,6 @@ Discord Bot (Py)
 * *aiohttp*
 * *random*
 * *os*
+* *datetime*
 
 **Bot-Token was added as an system environment variable** *(for protection)*
