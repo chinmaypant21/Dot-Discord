@@ -13,13 +13,10 @@ greet_words = ("Bonjour","Hola","Zdravstvuyte","Nǐn hǎo","Ciao","Yassou","Sela
 greet_identifiers = ("👋","hello","hi","hey","namaste","🙏","hallo","halo")
 bot = discord.Client()
 
-def message_activities(msg):
-    activities = {".hello": 1, ".bye": 2, ".info": 3}
-    if msg in activities:
-        return activities[msg]
-    else:
-        return None
-
+def getEmbed(title,description,color,authorName,thumbNail):
+    #https://discordpy.readthedocs.io/en/latest/api.html#embed
+    #send embedded msg by channel.send(embed=embeddedMsg)
+    return discord.Embed(title=title, description=description, color=color, author=authorName, thumbnail=thumbNail)
 
 @bot.event
 async def on_ready():
@@ -39,7 +36,10 @@ async def meme(msg):
             print('Could not download file...')
             return
         data = io.BytesIO(await resp.read())
-  await msg.channel.send(file=discord.File(data, 'meme.png'))
+  try:
+    await msg.channel.send(file=discord.File(data, 'meme.png'))
+  except:
+    print("Error in sending meme")
 
 async def greet(msg):
   await msg.channel.send(random.choice(greet_words)+" :wave:")
@@ -73,12 +73,6 @@ async def on_message(msg):
       if(msg.content == ".meme"):
         await meme(msg)
       elif msg.content.lower() in ['.hi','.hello']:
-        embedVar = discord.Embed(title="Title", description="Desc", color=0x62468a)
-        embedVar.add_field(name=" h", value="hi", inline=False)
-        embedVar.add_field(name="Field2", value="hi2", inline=False)
-        embedVar.timestamp = datetime.datetime.utcnow()
-        embedVar.set_footer(text='🕦 \u200b')
-        await msg.channel.send(embed=embedVar)
         await greet(msg)
       
       elif msg.content.split(' ')[0] == ".clear":
