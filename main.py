@@ -83,4 +83,4 @@ async def on_message(msg):
     elif msg.author != bot.user and msg.content.lower().startswith(greet_identifiers):
       await greet(msg)
   
-bot.run(BOT_TOKEN))
+bot.run(BOT_TOKEN)
