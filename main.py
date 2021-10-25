@@ -1,10 +1,9 @@
 import discord
 import requests
-import json
 import io
 import random
 import aiohttp
-
+import datetime
 from os import environ
 
 BOT_TOKEN = environ['DISCORD_DOT_TOKEN']
@@ -14,13 +13,10 @@ greet_words = ("Bonjour","Hola","Zdravstvuyte","Nǐn hǎo","Ciao","Yassou","Sela
 greet_identifiers = ("👋","hello","hi","hey","namaste","🙏","hallo","halo")
 bot = discord.Client()
 
-def message_activities(msg):
-    activities = {".hello": 1, ".bye": 2, ".info": 3}
-    if msg in activities:
-        return activities[msg]
-    else:
-        return None
-
+def getEmbed(title,description,color,authorName,thumbNail):
+    #https://discordpy.readthedocs.io/en/latest/api.html#embed
+    #send embedded msg by channel.send(embed=embeddedMsg)
+    return discord.Embed(title=title, description=description, color=color, author=authorName, thumbnail=thumbNail)
 
 @bot.event
 async def on_ready():
@@ -40,10 +36,35 @@ async def meme(msg):
             print('Could not download file...')
             return
         data = io.BytesIO(await resp.read())
-  await msg.channel.send(file=discord.File(data, 'meme.png'))
+  try:
+    await msg.channel.send(file=discord.File(data, 'meme.png'))
+  except:
+    print("Error in sending meme")
 
 async def greet(msg):
   await msg.channel.send(random.choice(greet_words)+" :wave:")
+
+async def clear(msg):
+  embed_msg = None
+  message = msg.content.split(' ')
+  if len(message) == 1:
+      message.append(1)
+
+  elif message[1].isnumeric():
+    if int(message[1]) > 30:
+      embed_msg = discord.Embed(title="⛔ Can not purge more than 30 messages at once :rolling_eyes:",color=0x8f0a0a)
+
+    else:
+      await msg.channel.purge(limit= int(message[1])+1)
+      embed_msg = discord.Embed(title=f":white_check_mark: Removed {message[1]} messages",color=0xdede21)
+
+  else:
+    embed_msg = discord.Embed(title="⛔ Invalid argument for clear command :confused:",color=0x8f0a0a)
+
+  embed_msg.set_author(name=msg.author)
+  embed_msg.timestamp = datetime.datetime.utcnow()
+  embed_msg.set_footer(text='🕦 \u200b')
+  await msg.channel.send(embed= embed_msg)
 
 @bot.event
 async def on_message(msg):
@@ -53,10 +74,13 @@ async def on_message(msg):
         await meme(msg)
       elif msg.content.lower() in ['.hi','.hello']:
         await greet(msg)
+      
+      elif msg.content.split(' ')[0] == ".clear":
+        await clear(msg)
       else:
         pass
 
     elif msg.author != bot.user and msg.content.lower().startswith(greet_identifiers):
       await greet(msg)
-
-bot.run(BOT_TOKEN)
+  
+bot.run(BOT_TOKEN))
