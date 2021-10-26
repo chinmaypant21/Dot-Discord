@@ -2,10 +2,10 @@
 Discord Bot (Py)
 
 # Available commannds
-- .greet
-- .meme 
-- .clear
-- .on_message(msg)
+- .hi/hello  : greet
+- .meme      : get meme (with NSFW filter)
+- .clear (optional) <arg :number_of messages> : clear given number of messages (default=1)
+- *more coming soon*
 
 # About Discord bot
 Discord bots are AIs that can perform a number of useful automated tasks and bot commands on your server, <br>
