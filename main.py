@@ -5,9 +5,8 @@ import random
 import aiohttp
 import datetime
 import os
-from os import environ
 
-BOT_TOKEN = environ['DISCORD_DOT_TOKEN']
+BOT_TOKEN = os.environ['DISCORD_DOT_TOKEN']
 nsfw_filter = True
 meme_api = "https://meme-api.herokuapp.com/gimme"
 greet_words = ("Bonjour","Hola","Zdravstvuyte","Nǐn hǎo","Ciao","Yassou","Selamat siang","नमस्ते","Merhaba","नमो नमः")
@@ -85,6 +84,8 @@ async def on_message(msg):
       await greet(msg)
   
 bot.run(BOT_TOKEN)
+'''
+# Todo: Use this code for making connection
 
 # Creating a Discord Connection
 from dotenv import load_dotenv
@@ -99,3 +100,4 @@ async def on_ready():
     print(f'{client.user} has connected to Discord!')
 
 client.run(TOKEN)
+'''
