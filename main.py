@@ -4,6 +4,7 @@ import io
 import random
 import aiohttp
 import datetime
+import os
 from os import environ
 
 BOT_TOKEN = environ['DISCORD_DOT_TOKEN']
@@ -84,3 +85,17 @@ async def on_message(msg):
       await greet(msg)
   
 bot.run(BOT_TOKEN)
+
+# Creating a Discord Connection
+from dotenv import load_dotenv
+
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print(f'{client.user} has connected to Discord!')
+
+client.run(TOKEN)
