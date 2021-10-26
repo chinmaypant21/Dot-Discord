@@ -25,6 +25,7 @@ and moderating the discussion.
 - "random"
 - "os"
 - "datetime"
+- "PIL" **(pillow)**
 
 **Bot-Token was added as an system environment variable** *(for protection)*
 
