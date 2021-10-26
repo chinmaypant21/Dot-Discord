@@ -5,7 +5,12 @@ Discord Bot (Py)
 - .hi/hello  : greet
 - .meme      : get meme (with NSFW filter)
 - .clear (optional) <arg :number_of messages> : clear given number of messages (default=1)
-- *more coming soon*
+- .rotate (optional) degree : (rotate the image)
+- *coming soon*
+- .flip
+- .mirror
+- .play
+
 
 # About Discord bot
 Discord bots are AIs that can perform a number of useful automated tasks and bot commands on your server, <br>
@@ -25,7 +30,7 @@ and moderating the discussion.
 - "random"
 - "os"
 - "datetime"
-- "PIL" **(pillow)**
+- "PIL" *(pillow)*
 
 **Bot-Token was added as an system environment variable** *(for protection)*
 
